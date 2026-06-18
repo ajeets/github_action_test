@@ -1,14 +1,16 @@
-name: Events Demo 1
+name: Test Project
 on: workflow_dispatch
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Output event data
-        run: echo "${{ toJSON(github.event) }}"
       - name: Get code
         uses: actions/checkout@v4
-      - name: Install dependencies
+      - name: Install NodeJS
+        uses: action/setup-node@v3
+        with:
+          node-version: 18
+      - name: install dependencies
         run: npm ci
       - name: Test code
         run: npm run test
